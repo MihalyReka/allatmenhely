@@ -105,5 +105,21 @@ public class AnimalSerImpl implements AnimalService {
         animalRepo.delete(animal);
     }
 
+    @Override
+    public AnimalTeljesLekeresDto getAnimalById(Long id) {
+        AnimalEnti animal=animalRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("A megadott állat nem található!"));
+
+        return animalMapper.entityToDto(animal);
+    }
+
+    @Override
+    public AnimalDisplayDto getPublicAnimalById(Long id) {
+        AnimalEnti animal = animalRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("A megadott állat nem található!"));
+
+        return animalMapper.entityToPublicDto(animal);
+    }
+
 
 }

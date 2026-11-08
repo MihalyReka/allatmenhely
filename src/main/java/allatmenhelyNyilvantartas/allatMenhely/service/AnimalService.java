@@ -19,5 +19,8 @@ public interface AnimalService {
 
     void deleteAnimal(Long id);
 
+    AnimalTeljesLekeresDto getAnimalById(Long id);
+    AnimalDisplayDto getPublicAnimalById(Long id);
+
 
 }

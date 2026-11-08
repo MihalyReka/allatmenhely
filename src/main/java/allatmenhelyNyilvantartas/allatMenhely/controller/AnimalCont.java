@@ -28,6 +28,16 @@ public class AnimalCont {
         return animalService.getAllPublicAnimals();
     }
 
+    @GetMapping("/{id}")
+    public AnimalTeljesLekeresDto getAnimalById(@PathVariable Long id) {
+        return animalService.getAnimalById(id);
+    }
+
+    @GetMapping("/public/{id}")
+    public AnimalDisplayDto getPublicAnimalById(@PathVariable Long id) {
+        return animalService.getPublicAnimalById(id);
+    }
+
     @PostMapping
     public AnimalTeljesLekeresDto createAnimal(@RequestBody AnimalCrudDto animalCrudDto) {
         return animalService.createAnimal(animalCrudDto);
@@ -44,4 +54,5 @@ public class AnimalCont {
     public void deleteAnimal(@PathVariable Long id) {
         animalService.deleteAnimal(id);
     }
+
 }
