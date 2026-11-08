@@ -3,7 +3,7 @@ package allatmenhelyNyilvantartas.allatMenhely.controller;
 import allatmenhelyNyilvantartas.allatMenhely.data.entity.AnimalEnti;
 import allatmenhelyNyilvantartas.allatMenhely.data.entity.HelyszinEnti;
 import allatmenhelyNyilvantartas.allatMenhely.service.AnimalService;
-import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.AnimalCrudDto;
+import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.*;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.display.AnimalDisplayDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class AnimalCont {
     private final AnimalService animalService;
 
     @GetMapping
-    public List<AnimalCrudDto> getAllAnimals(){
+    public List<AnimalTeljesLekeresDto> getAllAnimals(){
         return animalService.getAllAnimals();
     }
 
@@ -29,7 +29,15 @@ public class AnimalCont {
     }
 
     @PostMapping
-    public AnimalCrudDto createAnimal(@RequestBody AnimalCrudDto animalCrudDto) {
+    public AnimalTeljesLekeresDto createAnimal(@RequestBody AnimalCrudDto animalCrudDto) {
         return animalService.createAnimal(animalCrudDto);
+    }
+
+    @PutMapping("/{id}")
+    public AnimalTeljesLekeresDto updateAnimal(
+            @PathVariable Long id,
+            @RequestBody AnimalCrudDto animalCrudDto) {
+
+        return animalService.updateAnimal(id, animalCrudDto);
     }
 }

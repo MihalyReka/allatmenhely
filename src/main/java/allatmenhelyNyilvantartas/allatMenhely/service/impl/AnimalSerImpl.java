@@ -1,15 +1,11 @@
 package allatmenhelyNyilvantartas.allatMenhely.service.impl;
 
-import allatmenhelyNyilvantartas.allatMenhely.data.entity.AnimalEnti;
-import allatmenhelyNyilvantartas.allatMenhely.data.entity.BefogadoEnti;
-import allatmenhelyNyilvantartas.allatMenhely.data.entity.HelyszinEnti;
-import allatmenhelyNyilvantartas.allatMenhely.data.repository.AnimalRepo;
-import allatmenhelyNyilvantartas.allatMenhely.data.repository.HelyszinRepo;
+import allatmenhelyNyilvantartas.allatMenhely.data.entity.*;
+import allatmenhelyNyilvantartas.allatMenhely.data.repository.*;
 import allatmenhelyNyilvantartas.allatMenhely.service.AnimalService;
-import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.AnimalCrudDto;
+import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.*;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.display.AnimalDisplayDto;
 import allatmenhelyNyilvantartas.allatMenhely.service.mapper.AnimalMapper;
-import allatmenhelyNyilvantartas.allatMenhely.data.repository.BefogadoRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +21,7 @@ public class AnimalSerImpl implements AnimalService {
     private final HelyszinRepo helyszinRepo;
 
 
-    @Override
+    @Override //Get
     public List<AnimalDisplayDto> getAllPublicAnimals() {
         //return List.of();
         return animalMapper.entityListToPublicDtoList(
@@ -33,15 +29,15 @@ public class AnimalSerImpl implements AnimalService {
         );
     }
 
-    @Override
-    public List<AnimalCrudDto> getAllAnimals()  {
+    @Override //Get
+    public List<AnimalTeljesLekeresDto> getAllAnimals()  {
        // return List.of();
         return animalMapper.entityListToDtoList(
                 animalRepo.findAll()
         );
     }
-    @Override
-    public AnimalCrudDto createAnimal(AnimalCrudDto animalCrudDto) {
+    @Override //POST
+    public AnimalTeljesLekeresDto createAnimal(AnimalCrudDto animalCrudDto) {
         AnimalEnti animal = animalMapper.dtoToEntity(animalCrudDto);
 
         // Helyszín hozzárendelése
@@ -71,5 +67,33 @@ public class AnimalSerImpl implements AnimalService {
 
         // Mentett adat visszaalakítása DTO-vá
         return animalMapper.entityToDto(savedAnimal);
+    }
+
+    @Override
+    public AnimalTeljesLekeresDto updateAnimal(Long id, AnimalCrudDto animalCrudDto) {
+        AnimalEnti animal = animalRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("A megadott állat nem található!"));
+
+        animalMapper.updateEntityFromDto(animalCrudDto, animal);
+
+        if (animalCrudDto.getHelyszinId() != null) {
+            HelyszinEnti helyszin = helyszinRepo.findById(animalCrudDto.getHelyszinId())
+                    .orElseThrow(() -> new RuntimeException("A helyszín nem található!"));
+            animal.setHelyszin(helyszin);
+        } else {
+            animal.setHelyszin(null);
+        }
+
+        if (animalCrudDto.getAdopterId() != null) {
+            BefogadoEnti befogado = befogadoRepo.findById(animalCrudDto.getAdopterId())
+                    .orElseThrow(() -> new RuntimeException("Az örökbefogadó nem található!"));
+            animal.setAdopter(befogado);
+        } else {
+            animal.setAdopter(null);
+        }
+
+        AnimalEnti updatedAnimal = animalRepo.save(animal);
+
+        return animalMapper.entityToDto(updatedAnimal);
     }
 }
