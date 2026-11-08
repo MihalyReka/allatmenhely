@@ -96,4 +96,14 @@ public class AnimalSerImpl implements AnimalService {
 
         return animalMapper.entityToDto(updatedAnimal);
     }
+
+    @Override
+    public void deleteAnimal(Long id) {
+        AnimalEnti animal = animalRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("A megadott állat nem található!"));
+
+        animalRepo.delete(animal);
+    }
+
+
 }

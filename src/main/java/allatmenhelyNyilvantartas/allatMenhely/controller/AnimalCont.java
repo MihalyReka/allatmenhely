@@ -40,4 +40,8 @@ public class AnimalCont {
 
         return animalService.updateAnimal(id, animalCrudDto);
     }
+    @DeleteMapping("/{id}")
+    public void deleteAnimal(@PathVariable Long id) {
+        animalService.deleteAnimal(id);
+    }
 }
