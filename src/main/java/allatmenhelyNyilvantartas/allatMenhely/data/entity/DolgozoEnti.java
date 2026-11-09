@@ -45,4 +45,7 @@ public class DolgozoEnti {
     private Boolean active;
     */
 
+    @OneToOne(mappedBy = "dolgozo")
+    private GondozoEnti gondozo;
+
 }
