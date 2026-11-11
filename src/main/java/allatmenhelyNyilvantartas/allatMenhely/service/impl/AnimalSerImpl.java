@@ -1,6 +1,8 @@
 package allatmenhelyNyilvantartas.allatMenhely.service.impl;
 
 import allatmenhelyNyilvantartas.allatMenhely.data.entity.*;
+import allatmenhelyNyilvantartas.allatMenhely.data.enums.EgeszsegAllapot;
+import allatmenhelyNyilvantartas.allatMenhely.data.enums.FogadasiAllapot;
 import allatmenhelyNyilvantartas.allatMenhely.data.repository.*;
 import allatmenhelyNyilvantartas.allatMenhely.service.AnimalService;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.*;
@@ -50,6 +52,21 @@ public class AnimalSerImpl implements AnimalService {
 
             animal.setAdopter(befogado);
         }
+        //mikor adoptálhato
+        if(animal.getEgeszsegAllapot()==EgeszsegAllapot.KRITIKUS || animal.getEgeszsegAllapot()==EgeszsegAllapot.KEZELES_ALAT){
+            animal.setFogadasiAllapot(FogadasiAllapot.NEM_BEFOGADHATO);
+            animal.setAdopter(null);
+
+        }else animal.setFogadasiAllapot(FogadasiAllapot.ADOPTALHATO);
+
+        if (animal.getAdopter() != null) {
+            animal.setFogadasiAllapot(FogadasiAllapot.ADOPTALT);
+        } else if (animal.getFogadasiAllapot() == FogadasiAllapot.ADOPTALT) {
+        throw new RuntimeException(
+                "Az adoptált állatnak kötelező befogadóval rendelkeznie!"
+        );
+        }
+
 
         AnimalEnti savedAnimal = animalRepo.save(animal);
 
@@ -75,6 +92,18 @@ public class AnimalSerImpl implements AnimalService {
             animal.setAdopter(befogado);
         } else {
             animal.setAdopter(null);
+        }
+        if(animal.getEgeszsegAllapot()==EgeszsegAllapot.KRITIKUS || animal.getEgeszsegAllapot()==EgeszsegAllapot.KEZELES_ALAT){
+            animal.setFogadasiAllapot(FogadasiAllapot.NEM_BEFOGADHATO);
+            animal.setAdopter(null);
+
+        }else animal.setFogadasiAllapot(FogadasiAllapot.ADOPTALHATO);
+        if (animal.getAdopter() != null) {
+            animal.setFogadasiAllapot(FogadasiAllapot.ADOPTALT);
+        } else if (animal.getFogadasiAllapot() == FogadasiAllapot.ADOPTALT) {
+        throw new RuntimeException(
+                "Az adoptált állatnak kötelező befogadóval rendelkeznie!"
+        );
         }
 
         AnimalEnti updatedAnimal = animalRepo.save(animal);

@@ -66,6 +66,12 @@ public class GondAllatKapcsSerImpl implements GondAllatKapcsService {
                 .orElseThrow(() -> new RuntimeException(
                         "A dolgozó nem található: " + dto.getGondozoId()
                 ));
+        if (dolgozo.getBeosztas() == null ||
+                !dolgozo.getBeosztas().toLowerCase().contains("gondozó")) {
+            throw new RuntimeException(
+                    "Csak gondozói beosztású dolgozó osztható be állathoz!"
+            );
+        }
 
         AnimalEnti animal = animalRepo.findById(dto.getAnimalId())
                 .orElseThrow(() -> new RuntimeException(
@@ -111,6 +117,12 @@ public class GondAllatKapcsSerImpl implements GondAllatKapcsService {
             .orElseThrow(() -> new RuntimeException(
                     "A dolgozó nem található: " + dto.getGondozoId()
             ));
+    if (dolgozo.getBeosztas() == null ||
+            !dolgozo.getBeosztas().toLowerCase().contains("gondozó")) {
+        throw new RuntimeException(
+                "Csak gondozói beosztású dolgozó osztható be állathoz!"
+        );
+    }
 
     AnimalEnti animal = animalRepo.findById(dto.getAnimalId())
             .orElseThrow(() -> new RuntimeException(
