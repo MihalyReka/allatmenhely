@@ -52,10 +52,6 @@ public class AnimalEnti {
         private EgeszsegAllapot egeszsegAllapot;
 
         @ManyToOne
-        @JoinColumn(name = "helyszin_id")
-        private HelyszinEnti helyszin;
-
-        @ManyToOne
         @JoinColumn(name = "adopter_id")
         private BefogadoEnti adopter;
 

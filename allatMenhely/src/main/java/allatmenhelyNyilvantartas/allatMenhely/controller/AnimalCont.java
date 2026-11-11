@@ -1,7 +1,6 @@
 package allatmenhelyNyilvantartas.allatMenhely.controller;
 
 import allatmenhelyNyilvantartas.allatMenhely.data.entity.AnimalEnti;
-import allatmenhelyNyilvantartas.allatMenhely.data.entity.HelyszinEnti;
 import allatmenhelyNyilvantartas.allatMenhely.service.AnimalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
