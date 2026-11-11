@@ -7,10 +7,10 @@ import java.time.LocalDate;
 
 @Data
 public class GondAllatKapcsDisplayDto {
-    //@NotNull
+    @NotNull
     private Long gondozoId;
 
-    //@NotNull
+    @NotNull
     private Long animalId;
 
     @NotNull
