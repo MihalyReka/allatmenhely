@@ -22,8 +22,8 @@ public class GondAllatKapcsEnti {
     private  Long id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "gondozo_id", nullable = false)
-    private GondozoEnti gondozo;
+    @JoinColumn(name = "dolgozo_id", nullable = false)
+    private DolgozoEnti dolgozo;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "animal_id", nullable = false)

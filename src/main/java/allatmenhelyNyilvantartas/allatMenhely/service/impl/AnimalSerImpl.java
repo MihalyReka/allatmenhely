@@ -18,7 +18,7 @@ public class AnimalSerImpl implements AnimalService {
     private final AnimalRepo animalRepo;
     private final AnimalMapper animalMapper;
     private final BefogadoRepo befogadoRepo;
-    private final HelyszinRepo helyszinRepo;
+
 
 
     @Override //Get
@@ -40,17 +40,6 @@ public class AnimalSerImpl implements AnimalService {
     public AnimalTeljesLekeresDto createAnimal(AnimalCrudDto animalCrudDto) {
         AnimalEnti animal = animalMapper.dtoToEntity(animalCrudDto);
 
-        // Helyszín hozzárendelése
-        if (animalCrudDto.getHelyszinId() != null) {
-            HelyszinEnti helyszin = helyszinRepo
-                    .findById(animalCrudDto.getHelyszinId())
-                    .orElseThrow(() ->
-                            new RuntimeException("A helyszín nem található!")
-                    );
-
-            animal.setHelyszin(helyszin);
-        }
-
         // Örökbefogadó hozzárendelése
         if (animalCrudDto.getAdopterId() != null) {
             BefogadoEnti befogado = befogadoRepo
@@ -62,31 +51,27 @@ public class AnimalSerImpl implements AnimalService {
             animal.setAdopter(befogado);
         }
 
-        // Mentés adatbázisba
         AnimalEnti savedAnimal = animalRepo.save(animal);
 
-        // Mentett adat visszaalakítása DTO-vá
         return animalMapper.entityToDto(savedAnimal);
     }
 
     @Override
     public AnimalTeljesLekeresDto updateAnimal(Long id, AnimalCrudDto animalCrudDto) {
         AnimalEnti animal = animalRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("A megadott állat nem található!"));
+                .orElseThrow(() ->
+                        new RuntimeException("A megadott állat nem található!")
+                );
 
         animalMapper.updateEntityFromDto(animalCrudDto, animal);
 
-        if (animalCrudDto.getHelyszinId() != null) {
-            HelyszinEnti helyszin = helyszinRepo.findById(animalCrudDto.getHelyszinId())
-                    .orElseThrow(() -> new RuntimeException("A helyszín nem található!"));
-            animal.setHelyszin(helyszin);
-        } else {
-            animal.setHelyszin(null);
-        }
-
         if (animalCrudDto.getAdopterId() != null) {
-            BefogadoEnti befogado = befogadoRepo.findById(animalCrudDto.getAdopterId())
-                    .orElseThrow(() -> new RuntimeException("Az örökbefogadó nem található!"));
+            BefogadoEnti befogado = befogadoRepo
+                    .findById(animalCrudDto.getAdopterId())
+                    .orElseThrow(() ->
+                            new RuntimeException("Az örökbefogadó nem található!")
+                    );
+
             animal.setAdopter(befogado);
         } else {
             animal.setAdopter(null);

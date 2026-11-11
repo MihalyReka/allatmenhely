@@ -1,7 +1,5 @@
 package allatmenhelyNyilvantartas.allatMenhely.controller;
 
-import allatmenhelyNyilvantartas.allatMenhely.data.entity.AnimalEnti;
-import allatmenhelyNyilvantartas.allatMenhely.data.entity.HelyszinEnti;
 import allatmenhelyNyilvantartas.allatMenhely.service.AnimalService;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.*;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.display.AnimalDisplayDto;

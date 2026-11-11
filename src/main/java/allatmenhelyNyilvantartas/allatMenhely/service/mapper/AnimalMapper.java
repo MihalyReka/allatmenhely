@@ -15,14 +15,14 @@ import java.util.List;
 public interface AnimalMapper {
 
 //    // Entity -> teljes DTO (dolgozói lekérdezés)
-//    @Mapping(target = "helyszinId", source = "helyszin.id")
+
 //    @Mapping(target = "adopterId", source = "adopter.id")
 //    AnimalCrudDto entityToDto(AnimalEnti animal);
 //
 //    // Entity lista -> teljes DTO lista (dolgozói lekérdezés)
 //    List<AnimalCrudDto> entityListToDtoList(List<AnimalEnti> animals);
     // Entity -> teljes DTO (dolgozói lekérdezés)
-    @Mapping(target = "helyszinId", source = "helyszin.id")
+
     @Mapping(target = "adopterId", source = "adopter.id")
     AnimalTeljesLekeresDto entityToDto(AnimalEnti animal);
 
@@ -37,12 +37,10 @@ public interface AnimalMapper {
 
     // DTO -> Entity
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "helyszin", ignore = true)
     @Mapping(target = "adopter", ignore = true)
     AnimalEnti dtoToEntity(AnimalCrudDto dto);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "helyszin", ignore = true)
     @Mapping(target = "adopter", ignore = true)
     void updateEntityFromDto(AnimalCrudDto dto, @MappingTarget AnimalEnti entity);
 }
