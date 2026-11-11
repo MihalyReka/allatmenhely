@@ -20,6 +20,21 @@ public class FelhasznaloEnti {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true, length = 50)
+    private String username;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @OneToOne
+    @JoinColumn(name = "dolgozo_id", unique = true)
+    private DolgozoEnti dolgozo;
+
+    @OneToOne
+    @JoinColumn(name = "befogado_id", unique = true)
+    private BefogadoEnti befogado;
 }
