@@ -9,10 +9,10 @@ import java.time.LocalDate;
 public class GondAllatKapcsCrudDto {
 
 /**/
-    @NotNull
+    //@NotNull
     private Long gondozoId;
 
-    @NotNull
+    //@NotNull
     private Long animalId;
 
     @NotNull

@@ -28,8 +28,6 @@ public class AnimalCrudDto {
 
     private EgeszsegAllapot egeszsegAllapot;
 
-    private Long helyszinId;
-
     private Long adopterId;
 
 
