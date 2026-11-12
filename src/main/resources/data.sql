@@ -61,6 +61,25 @@ VALUES
 (3, 14, '2025-05-10', NULL),
 (3, 15, '2025-06-01', '2025-11-01');
 
+INSERT INTO FELHASZNALO
+(username, password, role, dolgozo_id, befogado_id)
+VALUES
+('anna.kovacs@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'BEFOGADO',  NULL, 1),
+('peter.nagy@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'BEFOGADO',  NULL, 2),
+('eszter.szabo@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'BEFOGADO',  NULL, 3),
+('gabor.toth@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'BEFOGADO', NULL, 4),
+('reka.varga@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'BEFOGADO',  NULL, 5),
+('bence.kiss@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'BEFOGADO', NULL, 6),
+('dora.molnar@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'BEFOGADO',  NULL, 7),
+('adam.horvath@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'BEFOGADO',  NULL, 8),
+('zsofia.farkas@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'BEFOGADO', NULL, 9),
+('mark.balogh@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'BEFOGADO',  NULL, 10),
+('tamas.kovacs@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'DOLGOZO',  1, NULL),
+('judit.nagy@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'DOLGOZO',  2, NULL),
+('andras.szabo@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'DOLGOZO',  3, NULL),
+('erika.toth@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'DOLGOZO',  4, NULL),
+('peter.varga@example.com', '$2a$10$og0u90H680Y133uokTnQXOB4IrMJKVCTDuwcKn3qMqjQNKXGXXwd2', 'ADMIN', 5, NULL);
+
 
 
 

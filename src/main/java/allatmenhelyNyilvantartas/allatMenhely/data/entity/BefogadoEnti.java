@@ -31,6 +31,7 @@ public class BefogadoEnti {
     @Column(nullable = false)
     private Neme neme;
 
+
     @Column(nullable = true)
     private LocalDate szDatum;
 
