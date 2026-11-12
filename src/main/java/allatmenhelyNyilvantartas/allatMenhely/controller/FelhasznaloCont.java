@@ -19,26 +19,31 @@ public class FelhasznaloCont {
 
     private final FelhasznaloService felhasznaloService;
 
-    // Összes felhasználó lekérése
+
     @GetMapping
     public List<FelhasznaloDisplayDto> getAllFelhasznalo() {
         return felhasznaloService.getAllFelhasznalo();
     }
 
-    // Egy felhasználó lekérése
+
     @GetMapping("/{id}")
     public FelhasznaloDisplayDto getFelhasznaloById(@PathVariable Long id) {
         return felhasznaloService.getFelhasznaloById(id);
     }
 
-    // Regisztráció
+    @GetMapping("/{id}/username")
+    public FelhasznaloCrudDto getFelhasznaloUsernameById(@PathVariable Long id) {
+        return felhasznaloService.getFelhasznaloUsernameById(id);
+    }
+
+
     @PostMapping("/regisztracio")
     public FelhasznaloDisplayDto createFelhasznalo(
             @Valid @RequestBody FelhasznaloElsoCrudDto dto) {
         return felhasznaloService.createFelhasznalo(dto);
     }
 
-    // Saját felhasználónév módosítása
+
     @PutMapping("/{id}")
     public FelhasznaloDisplayDto updateFelhasznalo(
             @PathVariable Long id,
@@ -46,7 +51,7 @@ public class FelhasznaloCont {
         return felhasznaloService.updateFelhasznalo(id, dto);
     }
 
-    // Adminisztrátori módosítás
+
     @PutMapping("/admin/{id}")
     public FelhasznaloDisplayDto updateFelhasznaloAdmin(
             @PathVariable Long id,
@@ -54,7 +59,7 @@ public class FelhasznaloCont {
         return felhasznaloService.updateFelhasznaloAdmin(id, dto);
     }
 
-    // Felhasználó törlése
+
     @DeleteMapping("/{id}")
     public void deleteFelhasznalo(@PathVariable Long id) {
         felhasznaloService.deleteFelhasznalo(id);

@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -44,6 +45,17 @@ public class FelhasznaloSerImpl implements FelhasznaloService {
                         "A felhasználó nem található: " + id));
 
         return felhasznaloMapper.entityToDto(felhasznalo);
+    }
+
+    @Override
+    public FelhasznaloCrudDto getFelhasznaloUsernameById(Long id) {
+        FelhasznaloEnti felhasznalo = felhasznaloRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Felhasználó nem található: " + id));
+
+        FelhasznaloCrudDto dto = new FelhasznaloCrudDto();
+        dto.setUsername(felhasznalo.getUsername());
+
+        return dto;
     }
 
     @Override
