@@ -1,7 +1,9 @@
 package allatmenhelyNyilvantartas.allatMenhely.service.impl;
 
 import allatmenhelyNyilvantartas.allatMenhely.data.entity.DolgozoEnti;
+import allatmenhelyNyilvantartas.allatMenhely.data.entity.FelhasznaloEnti;
 import allatmenhelyNyilvantartas.allatMenhely.data.repository.DolgozoRepo;
+import allatmenhelyNyilvantartas.allatMenhely.data.repository.FelhasznaloRepo;
 import allatmenhelyNyilvantartas.allatMenhely.service.DolgozoService;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.DolgozoCrudDto;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.display.DolgozoDisplayDto;
@@ -20,6 +22,7 @@ public class DolgozoSerImpl implements DolgozoService {
 
     private final DolgozoRepo dolgozoRepo;
     private final DolgozoMapper dolgozoMapper;
+    private final FelhasznaloRepo felhasznaloRepo;
 
 
     public List<DolgozoDisplayDto> getAllDolgozo() {
@@ -32,6 +35,24 @@ public class DolgozoSerImpl implements DolgozoService {
                 .orElseThrow(() -> new RuntimeException("A megadott dolgozó nem található!"));
 
         return dolgozoMapper.entityToDto(dolgozo);
+    }
+
+    @Override
+    public DolgozoCrudDto getSajatDolgozo(String username) {
+        FelhasznaloEnti felhasznalo = felhasznaloRepo.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException(
+                        "A bejelentkezett felhasználó nem található!"
+                ));
+
+        DolgozoEnti dolgozo = felhasznalo.getDolgozo();
+
+        if (dolgozo == null) {
+            throw new RuntimeException(
+                    "A felhasználóhoz nem tartozik dolgozói profil!"
+            );
+        }
+
+        return dolgozoMapper.entityToDisplayDto(dolgozo);
     }
 
     @Override

@@ -3,6 +3,7 @@ package allatmenhelyNyilvantartas.allatMenhely.controller;
 import allatmenhelyNyilvantartas.allatMenhely.service.AnimalService;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.*;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.display.AnimalDisplayDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,14 +38,14 @@ public class AnimalCont {
     }
 
     @PostMapping
-    public AnimalTeljesLekeresDto createAnimal(@RequestBody AnimalCrudDto animalCrudDto) {
+    public AnimalTeljesLekeresDto createAnimal(@Valid @RequestBody AnimalCrudDto animalCrudDto) {
         return animalService.createAnimal(animalCrudDto);
     }
 
     @PutMapping("/{id}")
     public AnimalTeljesLekeresDto updateAnimal(
-            @PathVariable Long id,
-            @RequestBody AnimalCrudDto animalCrudDto) {
+              @PathVariable Long id,
+              @Valid @RequestBody AnimalCrudDto animalCrudDto) {
 
         return animalService.updateAnimal(id, animalCrudDto);
     }

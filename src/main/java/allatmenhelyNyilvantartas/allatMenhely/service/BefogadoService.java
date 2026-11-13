@@ -10,15 +10,14 @@ public interface BefogadoService {
 
     List<BefogadoTeljesLekeresDto> getAllBefogadok();
 
-    List<BefogadoDisplayDto> getAllPublicBefogadok();
-
     BefogadoTeljesLekeresDto getBefogadoById(Long id);
 
-    BefogadoDisplayDto getPublicBefogadoById(Long id);
 
     BefogadoTeljesLekeresDto createBefogado(BefogadoCrudDto befogadoCrudDto);
 
     BefogadoTeljesLekeresDto updateBefogado(Long id, BefogadoCrudDto befogadoCrudDto);
+
+    BefogadoDisplayDto getSajatBefogado(String username);
 
     void deleteBefogado(Long id);
 }

@@ -11,7 +11,7 @@ public interface FelhasznaloService {
     List<FelhasznaloDisplayDto> getAllFelhasznalo();
 
     FelhasznaloDisplayDto getFelhasznaloById(Long id);
-    FelhasznaloCrudDto getFelhasznaloUsernameById(Long id);
+
 
     FelhasznaloDisplayDto createFelhasznalo(FelhasznaloElsoCrudDto dto);
 

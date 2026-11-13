@@ -31,10 +31,7 @@ public class FelhasznaloCont {
         return felhasznaloService.getFelhasznaloById(id);
     }
 
-    @GetMapping("/{id}/username")
-    public FelhasznaloCrudDto getFelhasznaloUsernameById(@PathVariable Long id) {
-        return felhasznaloService.getFelhasznaloUsernameById(id);
-    }
+
 
 
     @PostMapping("/regisztracio")
@@ -55,7 +52,7 @@ public class FelhasznaloCont {
     @PutMapping("/admin/{id}")
     public FelhasznaloDisplayDto updateFelhasznaloAdmin(
             @PathVariable Long id,
-            @RequestBody FelhasznaloAdminCrudDto dto) {
+            @Valid @RequestBody FelhasznaloAdminCrudDto dto) {
         return felhasznaloService.updateFelhasznaloAdmin(id, dto);
     }
 

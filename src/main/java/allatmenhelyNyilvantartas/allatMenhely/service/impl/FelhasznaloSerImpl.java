@@ -1,16 +1,10 @@
 package allatmenhelyNyilvantartas.allatMenhely.service.impl;
 
-import allatmenhelyNyilvantartas.allatMenhely.data.entity.BefogadoEnti;
-import allatmenhelyNyilvantartas.allatMenhely.data.entity.DolgozoEnti;
-import allatmenhelyNyilvantartas.allatMenhely.data.entity.FelhasznaloEnti;
+import allatmenhelyNyilvantartas.allatMenhely.data.entity.*;
 import allatmenhelyNyilvantartas.allatMenhely.data.enums.Role;
-import allatmenhelyNyilvantartas.allatMenhely.data.repository.BefogadoRepo;
-import allatmenhelyNyilvantartas.allatMenhely.data.repository.DolgozoRepo;
-import allatmenhelyNyilvantartas.allatMenhely.data.repository.FelhasznaloRepo;
+import allatmenhelyNyilvantartas.allatMenhely.data.repository.*;
 import allatmenhelyNyilvantartas.allatMenhely.service.FelhasznaloService;
-import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.FelhasznaloAdminCrudDto;
-import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.FelhasznaloCrudDto;
-import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.FelhasznaloElsoCrudDto;
+import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.*;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.display.FelhasznaloDisplayDto;
 import allatmenhelyNyilvantartas.allatMenhely.service.mapper.FelhasznaloMapper;
 import jakarta.transaction.Transactional;
@@ -45,17 +39,6 @@ public class FelhasznaloSerImpl implements FelhasznaloService {
                         "A felhasználó nem található: " + id));
 
         return felhasznaloMapper.entityToDto(felhasznalo);
-    }
-
-    @Override
-    public FelhasznaloCrudDto getFelhasznaloUsernameById(Long id) {
-        FelhasznaloEnti felhasznalo = felhasznaloRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Felhasználó nem található: " + id));
-
-        FelhasznaloCrudDto dto = new FelhasznaloCrudDto();
-        dto.setUsername(felhasznalo.getUsername());
-
-        return dto;
     }
 
     @Override

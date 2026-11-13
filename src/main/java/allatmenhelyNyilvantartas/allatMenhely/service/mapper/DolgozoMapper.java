@@ -22,4 +22,5 @@ public interface DolgozoMapper {
     void updateEntityFromDto(DolgozoCrudDto dto, @MappingTarget DolgozoEnti dolgozo);
 
 
+    DolgozoCrudDto entityToDisplayDto(DolgozoEnti dolgozo);
 }

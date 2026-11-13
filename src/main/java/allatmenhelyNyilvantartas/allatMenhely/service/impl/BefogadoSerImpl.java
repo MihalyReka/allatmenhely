@@ -1,7 +1,9 @@
 package allatmenhelyNyilvantartas.allatMenhely.service.impl;
 
 import allatmenhelyNyilvantartas.allatMenhely.data.entity.BefogadoEnti;
+import allatmenhelyNyilvantartas.allatMenhely.data.entity.FelhasznaloEnti;
 import allatmenhelyNyilvantartas.allatMenhely.data.repository.BefogadoRepo;
+import allatmenhelyNyilvantartas.allatMenhely.data.repository.FelhasznaloRepo;
 import allatmenhelyNyilvantartas.allatMenhely.service.BefogadoService;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.BefogadoCrudDto;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.BefogadoTeljesLekeresDto;
@@ -19,6 +21,7 @@ public class BefogadoSerImpl implements BefogadoService {
 
     private final BefogadoRepo befogadoRepo;
     private final BefogadoMapper befogadoMapper;
+    private  final FelhasznaloRepo felhasznaloRepo;
 
 
     @Override
@@ -26,10 +29,6 @@ public class BefogadoSerImpl implements BefogadoService {
         return befogadoMapper.entityListToDtoList(befogadoRepo.findAll());
     }
 
-    @Override
-    public List<BefogadoDisplayDto> getAllPublicBefogadok() {
-        return befogadoMapper.entityListToDisplayDtoList(befogadoRepo.findAll());
-    }
 
     @Override
     public BefogadoTeljesLekeresDto getBefogadoById(Long id) {
@@ -39,13 +38,6 @@ public class BefogadoSerImpl implements BefogadoService {
         return befogadoMapper.entityToDto(befogado);
     }
 
-    @Override
-    public BefogadoDisplayDto getPublicBefogadoById(Long id) {
-        BefogadoEnti befogado = befogadoRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("A megadott befogadó nem található!"));
-
-        return befogadoMapper.entityToDisplayDto(befogado);
-    }
 
     @Override
     public BefogadoTeljesLekeresDto createBefogado(BefogadoCrudDto befogadoCrudDto) {
@@ -66,6 +58,24 @@ public class BefogadoSerImpl implements BefogadoService {
         BefogadoEnti updatedBefogado = befogadoRepo.save(befogado);
 
         return befogadoMapper.entityToDto(updatedBefogado);
+    }
+
+    @Override
+    public BefogadoDisplayDto getSajatBefogado(String username) {
+        FelhasznaloEnti felhasznalo = felhasznaloRepo.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException(
+                        "A bejelentkezett felhasználó nem található!"
+                ));
+
+        BefogadoEnti befogado = felhasznalo.getBefogado();
+
+        if (befogado == null) {
+            throw new RuntimeException(
+                    "A felhasználóhoz nem tartozik befogadói profil!"
+            );
+        }
+
+        return befogadoMapper.entityToDisplayDto(befogado);
     }
 
     @Override

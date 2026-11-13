@@ -6,6 +6,7 @@ import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.DolgozoCrudDto;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.display.DolgozoDisplayDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,10 @@ public class DolgozoCont {
         return dolgozoService.getDolgozoById(id);
     }
 
+    @GetMapping("/sajat")
+    public DolgozoCrudDto getSajatDolgozo(Authentication authentication) {
+        return dolgozoService.getSajatDolgozo(authentication.getName());
+    }
     // Új dolgozó létrehozása
     @PostMapping
     public DolgozoDisplayDto createDolgozo(@Valid @RequestBody DolgozoCrudDto dolgozoCrudDto) {

@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebSecurity
@@ -23,11 +22,35 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth->auth.requestMatchers(
-                        "/api/felhasznalo/regisztracio"
-                ).permitAll().anyRequest().authenticated()
-                ).httpBasic(basic->{});
+                .csrf(csrf -> csrf.disable()).userDetailsService(felhasznaloDetailService)
+                .authorizeHttpRequests(auth->auth
+                        .requestMatchers("/api/felhasznalok/regisztracio")
+                            .permitAll()
+
+                        .requestMatchers("/api/animals/public/**")
+                            .permitAll()
+
+                        .requestMatchers("/api/animals/**")
+                            .hasAnyRole("DOLGOZO", "ADMIN")
+
+                        .requestMatchers("/api/befogado/sajat")
+                            .hasAnyRole("BEFOGADO","ADMIN")
+
+                        .requestMatchers("/api/befogado/**")
+                            .hasAnyRole("DOLGOZO", "ADMIN")
+
+                        .requestMatchers("/api/dolgozo/sajat")
+                        .hasAnyRole("DOLGOZO","ADMIN")
+
+                        .requestMatchers("/api/dolgozo/**").hasRole("ADMIN")
+
+                        .requestMatchers("/api/gond-allat-kapcs/**")
+                            .hasAnyRole("DOLGOZO", "ADMIN")
+
+                        .requestMatchers("/api/felhasznalok/**").hasRole("ADMIN")
+
+                        .anyRequest().authenticated())
+                .httpBasic(basic->{});
         return http.build();
 
     }

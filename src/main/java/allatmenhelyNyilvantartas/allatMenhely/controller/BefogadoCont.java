@@ -6,6 +6,7 @@ import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.BefogadoTeljesLek
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.display.BefogadoDisplayDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,19 +22,15 @@ public class BefogadoCont {
         return befogadoService.getAllBefogadok();
     }
 
-    @GetMapping("/public")
-    public List<BefogadoDisplayDto> getAllPublicBefogadok() {
-        return befogadoService.getAllPublicBefogadok();
-    }
 
     @GetMapping("/{id}")
     public BefogadoTeljesLekeresDto getBefogadoById(@PathVariable Long id) {
         return befogadoService.getBefogadoById(id);
     }
 
-    @GetMapping("/public/{id}")
-    public BefogadoDisplayDto getPublicBefogadoById(@PathVariable Long id) {
-        return befogadoService.getPublicBefogadoById(id);
+    @GetMapping("/sajat")
+    public BefogadoDisplayDto getSajatBefogado(Authentication authentication) {
+        return befogadoService.getSajatBefogado(authentication.getName());
     }
 
     @PostMapping
