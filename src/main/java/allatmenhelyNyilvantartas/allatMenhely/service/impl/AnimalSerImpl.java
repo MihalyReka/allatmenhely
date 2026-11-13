@@ -9,7 +9,9 @@ import allatmenhelyNyilvantartas.allatMenhely.service.dto.crud.*;
 import allatmenhelyNyilvantartas.allatMenhely.service.dto.display.AnimalDisplayDto;
 import allatmenhelyNyilvantartas.allatMenhely.service.mapper.AnimalMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -77,7 +79,8 @@ public class AnimalSerImpl implements AnimalService {
     public AnimalTeljesLekeresDto updateAnimal(Long id, AnimalCrudDto animalCrudDto) {
         AnimalEnti animal = animalRepo.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("A megadott állat nem található!")
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,"A megadott állat nem található!")
                 );
 
         animalMapper.updateEntityFromDto(animalCrudDto, animal);
@@ -86,7 +89,8 @@ public class AnimalSerImpl implements AnimalService {
             BefogadoEnti befogado = befogadoRepo
                     .findById(animalCrudDto.getAdopterId())
                     .orElseThrow(() ->
-                            new RuntimeException("Az örökbefogadó nem található!")
+                            new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND,"Az örökbefogadó nem található!")
                     );
 
             animal.setAdopter(befogado);
@@ -114,7 +118,8 @@ public class AnimalSerImpl implements AnimalService {
     @Override
     public void deleteAnimal(Long id) {
         AnimalEnti animal = animalRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("A megadott állat nem található!"));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,"A megadott állat nem található!"));
 
         animalRepo.delete(animal);
     }
@@ -122,7 +127,8 @@ public class AnimalSerImpl implements AnimalService {
     @Override
     public AnimalTeljesLekeresDto getAnimalById(Long id) {
         AnimalEnti animal=animalRepo.findById(id)
-                .orElseThrow(()-> new RuntimeException("A megadott állat nem található!"));
+                .orElseThrow(()-> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,"A megadott állat nem található!"));
 
         return animalMapper.entityToDto(animal);
     }
@@ -130,7 +136,8 @@ public class AnimalSerImpl implements AnimalService {
     @Override
     public AnimalDisplayDto getPublicAnimalById(Long id) {
         AnimalEnti animal = animalRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("A megadott állat nem található!"));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,"A megadott állat nem található!"));
 
         return animalMapper.entityToPublicDto(animal);
     }

@@ -2,10 +2,7 @@ package allatmenhelyNyilvantartas.allatMenhely.service.dto.crud;
 
 import allatmenhelyNyilvantartas.allatMenhely.data.enums.Neme;
 import allatmenhelyNyilvantartas.allatMenhely.data.enums.Role;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -16,6 +13,7 @@ public class FelhasznaloElsoCrudDto {
     private String username;
 
     @NotBlank
+    @Size(min = 7, max = 30,message = "A jelszónak legalább 8 karakter hosszúnak kell lennie!")
     private String password;
 
     @NotBlank
