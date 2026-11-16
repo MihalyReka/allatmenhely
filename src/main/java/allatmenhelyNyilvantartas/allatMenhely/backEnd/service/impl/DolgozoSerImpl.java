@@ -4,10 +4,12 @@ import allatmenhelyNyilvantartas.allatMenhely.backEnd.data.entity.DolgozoEnti;
 import allatmenhelyNyilvantartas.allatMenhely.backEnd.data.entity.FelhasznaloEnti;
 import allatmenhelyNyilvantartas.allatMenhely.backEnd.data.repository.DolgozoRepo;
 import allatmenhelyNyilvantartas.allatMenhely.backEnd.data.repository.FelhasznaloRepo;
+import allatmenhelyNyilvantartas.allatMenhely.backEnd.data.repository.GondAllatKapcsRepo;
 import allatmenhelyNyilvantartas.allatMenhely.backEnd.service.DolgozoService;
 import allatmenhelyNyilvantartas.allatMenhely.backEnd.service.dto.crud.DolgozoCrudDto;
 import allatmenhelyNyilvantartas.allatMenhely.backEnd.service.dto.display.DolgozoDisplayDto;
 import allatmenhelyNyilvantartas.allatMenhely.backEnd.service.mapper.DolgozoMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class DolgozoSerImpl implements DolgozoService {
     private final DolgozoRepo dolgozoRepo;
     private final DolgozoMapper dolgozoMapper;
     private final FelhasznaloRepo felhasznaloRepo;
-
+    private final GondAllatKapcsRepo gondAllatKapcsRepo;
 
     public List<DolgozoDisplayDto> getAllDolgozo() {
         return dolgozoMapper.entityListToDtoList(dolgozoRepo.findAll());
@@ -76,9 +78,16 @@ public class DolgozoSerImpl implements DolgozoService {
     }
 
     @Override
+    @Transactional
     public void deleteDolgozo(Long id) {
         DolgozoEnti dolgozo = dolgozoRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("A megadott dolgozó nem található!"));
+                .orElseThrow(() -> new RuntimeException(
+                        "A megadott dolgozó nem található!"
+                ));
+
+        gondAllatKapcsRepo.deleteByDolgozo_Id(id);
+        felhasznaloRepo.findByDolgozo_Id(id)
+                .ifPresent(felhasznaloRepo::delete);
 
         dolgozoRepo.delete(dolgozo);
     }

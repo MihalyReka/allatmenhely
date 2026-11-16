@@ -1,5 +1,7 @@
 package allatmenhelyNyilvantartas.allatMenhely.backEnd.service.dto.display;
 
+import allatmenhelyNyilvantartas.allatMenhely.backEnd.data.enums.EgeszsegAllapot;
+import allatmenhelyNyilvantartas.allatMenhely.backEnd.data.enums.FogadasiAllapot;
 import allatmenhelyNyilvantartas.allatMenhely.backEnd.data.enums.Neme;
 import lombok.Data;
 
@@ -8,6 +10,7 @@ import java.time.LocalDate;
 @Data
 public class AnimalDisplayDto {
 
+    private Long id;
     private String nev;
 
     private String fajta;
@@ -18,11 +21,11 @@ public class AnimalDisplayDto {
 
     private LocalDate szDatum;
 
-    //private LocalDate arrivalDate;
+    private LocalDate arrivalDate;
 
-    //private FogadasiAllapot fogadasiAllapot;
+    private FogadasiAllapot fogadasiAllapot;
 
-    //private EgeszsegAllapot egeszsegAllapot;
+    private EgeszsegAllapot egeszsegAllapot;
 
 
 }

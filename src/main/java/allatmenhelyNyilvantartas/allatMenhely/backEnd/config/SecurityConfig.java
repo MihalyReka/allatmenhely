@@ -12,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
+import org.springframework.http.HttpMethod;
 import java.util.List;
 
 @Configuration
@@ -40,14 +40,31 @@ public class SecurityConfig {
                         .requestMatchers("/api/felhasznalok/regisztracio")
                             .permitAll()
 
-                        .requestMatchers("/api/animals/public/**")
-                            .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/animals", "/api/animals/**")
+                        .permitAll()
 
-                        .requestMatchers("/api/animals/**")
-                            .hasAnyRole("DOLGOZO", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/animals/**")
+                        .hasAnyRole("DOLGOZO", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/animals/**")
+                        .hasAnyRole("DOLGOZO", "ADMIN")
 
-                        .requestMatchers("/api/befogado/sajat")
-                            .hasAnyRole("BEFOGADO","ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/animals/**")
+                        .hasAnyRole("DOLGOZO", "ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/befogado/sajat")
+                        .hasAnyRole("BEFOGADO", "ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/befogado", "/api/befogado/**")
+                        .hasAnyRole("DOLGOZO", "ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/api/befogado")
+                        .hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.PUT, "/api/befogado/**")
+                        .hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.DELETE, "/api/befogado/**")
+                        .hasRole("ADMIN")
 
                         .requestMatchers("/api/befogado/**")
                             .hasAnyRole("DOLGOZO", "ADMIN")

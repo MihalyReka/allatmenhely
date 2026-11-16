@@ -31,10 +31,10 @@ public class FelhasznaloEnti {
     private Role role;
 
     @OneToOne
-    @JoinColumn(name = "dolgozo_id", unique = true)
+    @JoinColumn(name = "dolgozo_id", unique = true,nullable = true)
     private DolgozoEnti dolgozo;
 
     @OneToOne
-    @JoinColumn(name = "befogado_id", unique = true)
+    @JoinColumn(name = "befogado_id", unique = true, nullable = true)
     private BefogadoEnti befogado;
 }

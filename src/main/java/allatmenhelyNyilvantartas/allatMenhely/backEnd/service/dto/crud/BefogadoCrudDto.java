@@ -21,7 +21,7 @@ public class BefogadoCrudDto {
 
     private LocalDate szDatum;
 
-    @Pattern(regexp = "^\\+?[0-9]{9}$")
+    @Pattern(regexp = "^\\+?[0-9]{9,12}$")
     private String telefonSzam;
 
     @Email

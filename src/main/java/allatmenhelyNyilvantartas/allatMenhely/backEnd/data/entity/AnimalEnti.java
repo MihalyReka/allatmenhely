@@ -54,7 +54,7 @@ public class AnimalEnti {
 
 
         @ManyToOne
-        @JoinColumn(name = "adopter_id")
+        @JoinColumn(name = "adopter_id",nullable = true)
         private BefogadoEnti adopter;
 
 

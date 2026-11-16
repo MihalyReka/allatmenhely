@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface FelhasznaloRepo extends JpaRepository<FelhasznaloEnti,Long> {
 
     Optional<FelhasznaloEnti> findByUsername(String username);
+    Optional<FelhasznaloEnti> findByBefogado_Id(Long befogadoId);
+    Optional<FelhasznaloEnti> findByDolgozo_Id(Long dolgozoId);
     boolean existsByUsername(String username);
     boolean existsByDolgozo_Id(Long dolgozoId);
     boolean existsByBefogado_Id(Long befogadoId);

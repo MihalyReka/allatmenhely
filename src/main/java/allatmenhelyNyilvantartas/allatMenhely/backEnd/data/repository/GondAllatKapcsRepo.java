@@ -7,4 +7,6 @@ public interface GondAllatKapcsRepo extends JpaRepository<GondAllatKapcsEnti,Lon
 
     boolean existsByAnimal_IdAndEddigIsNull(Long animalId);
     boolean existsByAnimal_IdAndEddigIsNullAndIdNot(Long animalId, Long id);
+    void deleteByDolgozo_Id(Long dolgozoId);
+
 }
