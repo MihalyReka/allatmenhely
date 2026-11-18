@@ -24,21 +24,21 @@ INSERT INTO ALLATOK
 (nev, fajta, allat_tipus, neme, sz_datum, arrival_date,
  fogadasi_allapot, egeszseg_allapot, adopter_id)
 VALUES
-('Morzsi', 'Labrador', 'Kutya', 'MALE', '2021-05-10', '2025-01-10', 'ADOPTALHATO', 'EGESZSEGES', NULL),
-('Luna', 'Beagle', 'Kutya', 'FEMALE', '2020-08-15', '2025-01-12', 'ADOPTALHATO', 'GYOGYULAS_FELE', NULL),
+('Morzsi', 'Labrador', 'Kutya', 'MALE', NULL, '2025-01-10', 'ADOPTALHATO', 'EGESZSEGES', NULL),
+('Luna', 'Beagle', 'Kutya', 'FEMALE', NULL, '2025-01-12', 'ADOPTALHATO', 'GYOGYULAS_FELE', NULL),
 ('Cirmi', 'Házi macska', 'Macska', 'FEMALE', '2022-03-20', '2025-02-01', 'ADOPTALT', 'EGESZSEGES', 1),
-('Buksi', 'Német juhász', 'Kutya', 'MALE', '2019-11-02', '2025-02-05', 'NEM_BEFOGADHATO', 'KEZELES_ALAT', NULL),
+('Buksi', 'Német juhász', 'Kutya', 'MALE', NULL, '2025-02-05', 'NEM_BEFOGADHATO', 'KEZELES_ALAT', NULL),
 ('Mici', 'Házi macska', 'Macska', 'FEMALE', '2023-06-12', '2025-02-10', 'ADOPTALHATO', 'EGESZSEGES', NULL),
-('Max', 'Golden retriever', 'Kutya', 'MALE', '2021-09-25', '2025-03-01', 'ADOPTALT', 'EGESZSEGES', 2),
-('Bella', 'Uszkár', 'Kutya', 'FEMALE', '2020-04-18', '2025-03-05', 'ADOPTALHATO', 'KRITIKUS', NULL),
-('Pamacs', 'Házi macska', 'Macska', 'MALE', '2022-12-01', '2025-03-10', 'ADOPTALHATO', 'GYOGYULAS_FELE', NULL),
+('Max', 'Golden retriever', 'Kutya', 'MALE', NULL, '2025-03-01', 'ADOPTALT', 'EGESZSEGES', 2),
+('Bella', 'Uszkár', 'Kutya', 'FEMALE', NULL, '2025-03-05', 'ADOPTALHATO', 'KRITIKUS', NULL),
+('Pamacs', 'Házi macska', 'Macska', 'MALE', NULL, '2025-03-10', 'ADOPTALHATO', 'GYOGYULAS_FELE', NULL),
 ('Rex', 'Vizsla', 'Kutya', 'MALE', '2018-07-07', '2025-04-01', 'ADOPTALT', 'EGESZSEGES', 3),
 ('Hógolyó', 'Bichon', 'Kutya', 'MALE', '2023-01-15', '2025-04-05', 'ADOPTALHATO', 'EGESZSEGES', NULL),
 ('Folti', 'Házi macska', 'Macska', 'FEMALE', '2021-02-14', '2025-04-10', 'ADOPTALT', 'KEZELES_ALAT', 4),
 ('Daisy', 'Tacskó', 'Kutya', 'FEMALE', '2020-10-30', '2025-05-01', 'ADOPTALHATO', 'EGESZSEGES', NULL),
-('Zokni', 'Házi macska', 'Macska', 'MALE', '2022-05-19', '2025-05-05', 'NEM_BEFOGADHATO', 'GYOGYULAS_FELE', NULL),
+('Zokni', 'Házi macska', 'Macska', 'MALE',NULL, '2025-05-05', 'NEM_BEFOGADHATO', 'GYOGYULAS_FELE', NULL),
 ('Charlie', 'Border collie', 'Kutya', 'MALE', '2019-08-08', '2025-05-10', 'ADOPTALT', 'EGESZSEGES', 5),
-('Nala', 'Házi macska', 'Macska', 'FEMALE', '2023-04-22', '2025-06-01', 'ADOPTALHATO', 'EGESZSEGES', NULL);
+('Nala', 'Házi macska', 'Macska', 'FEMALE', NULL, '2025-06-01', 'ADOPTALHATO', 'EGESZSEGES', NULL);
 
 INSERT INTO GONDO_ALLAT_KAPCS
 (dolgozo_id, animal_id, kezdet, eddig)
